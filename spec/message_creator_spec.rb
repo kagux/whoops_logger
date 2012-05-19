@@ -27,7 +27,7 @@ describe "WhoopsLogger::MessageCreator" do
   
   describe "#create!" do
     it "should not send message if ignore_message? is true" do
-      strategy = lambda{}
+      strategy = lambda{|message, raw_data|}
       message_creator = WhoopsLogger::MessageCreator.new(strategy, {})
       message_creator.stub(:ignore_message?).and_return(true)
       
