@@ -1,6 +1,6 @@
 module WhoopsLogger
   class Sender
-    NOTICES_URI = '/events/'.freeze
+    NOTICES_URI = 'events/'.freeze
     HTTP_ERRORS = [Timeout::Error,
                    Errno::EINVAL,
                    Errno::ECONNRESET,
@@ -17,7 +17,7 @@ module WhoopsLogger
 
     def initialize(options = {})
       [:proxy_host, :proxy_port, :proxy_user, :proxy_pass, :protocol,
-        :host, :port, :secure, :http_open_timeout, :http_read_timeout].each do |option|
+        :host, :port, :secure, :http_open_timeout, :http_read_timeout, :path].each do |option|
         instance_variable_set("@#{option}", options[option])
       end
     end
@@ -66,12 +66,16 @@ module WhoopsLogger
     private
 
     attr_reader :proxy_host, :proxy_port, :proxy_user, :proxy_pass, :protocol,
-      :host, :port, :secure, :http_open_timeout, :http_read_timeout
+      :host, :port, :secure, :http_open_timeout, :http_read_timeout, :path
 
     def url
-      URI.parse("#{protocol}://#{host}:#{port}").merge(NOTICES_URI)
+      URI.parse("#{protocol}://#{host}:#{port}/#{url_path}")
     end
 
+    def url_path
+      return NOTICES_URI if path.nil?
+      path + (path.nil? || path.length == 0 ? "":"/") + NOTICES_URI
+    end
     def log(level, message, response = nil)
       logger.send level, message if logger
     end

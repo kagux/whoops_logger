@@ -6,7 +6,7 @@ module WhoopsLogger
   class Configuration
     OPTIONS = [:host, :http_open_timeout, :http_read_timeout,
         :port, :protocol, :proxy_host,
-        :proxy_pass, :proxy_port, :proxy_user, :secure].freeze
+        :proxy_pass, :proxy_port, :proxy_user, :secure, :path].freeze
 
     # The host to connect to
     attr_accessor :host
@@ -37,7 +37,9 @@ module WhoopsLogger
     attr_accessor :proxy_pass
     
     attr_accessor :logger
-    
+
+    attr_accessor :path
+
     alias_method :secure?, :secure
 
     def initialize

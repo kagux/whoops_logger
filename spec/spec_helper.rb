@@ -6,6 +6,8 @@ require 'rspec'
 require 'whoops_logger'
 require 'fakeweb'
 
+FakeWeb.allow_net_connect = false
+
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
 Dir["#{rspec_dir}/support/**/*.rb"].each {|f| require f}
