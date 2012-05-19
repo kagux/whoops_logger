@@ -8,8 +8,8 @@ gem "json"
 # Include everything needed to run rake, tests, features, etc.
 group :development do
   gem "rspec", "~> 2.6.0"
-  gem "bundler", "~> 1.0.0"
-  gem "jeweler", "~> 1.5.2"
+  #gem "bundler", "~> 1.0.0"
+  gem "jeweler", "~> 1.8.3"
   if RUBY_VERSION =~ /1.8/
     gem "ruby-debug"
   else
